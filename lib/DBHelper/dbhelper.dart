@@ -97,7 +97,7 @@ class DBHelper
   Future<List<Map<String,dynamic>>> allDrivers()async
   {
     Database db=await database;
-   List<Map<String,dynamic>> rows  =await db.query('Driver');
+   List<Map<String,dynamic>> rows  =await db.query('Driver',orderBy: "isDeleted");
    return rows;
   }
   Future<List<DriverModel>> getAllDrivers()async
@@ -112,6 +112,22 @@ class DBHelper
     // }
     // return driver_list;
     return rows.map((row) => DriverModel.fromMap(row)).toList();
+
+  }
+  Future<int> delteDriver(String nic)async
+  {
+    Database db=await database;
+    // String query='''
+    //   update driver set isDelted=1 where cnic='${nic}'
+    //  ''';
+    //  int id=await db.rawUpdate(query);
+    // return id;
+    Map<String,dynamic> updateMap={
+      "isDeleted":1
+    };
+   // db.delete('Driver',where: "cnic=?",whereArgs: [nic]);
+   int id=await db.update('Driver', updateMap,where: "cnic = ?",whereArgs: [nic]);
+   return id;
 
   }
   

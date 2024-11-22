@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
                 return AllDriverScreen();
               }));
             
-            }, child:Text('Driver',style: TextStyle(fontSize:30 ),)),
+            }, child:Text('Driver',style: TextStyle(fontSize:20 ),)),
           )
         ],
       ),
